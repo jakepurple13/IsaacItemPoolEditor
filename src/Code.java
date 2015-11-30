@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,6 +9,7 @@ import java.io.PrintWriter;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import javax.swing.DefaultListModel;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -154,13 +156,14 @@ public class Code {
 	  }
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public DefaultListModel<?> saveXML1(String name) throws ParserConfigurationException {
+	public DefaultListModel<?> saveXML1(String name) throws ParserConfigurationException, FileNotFoundException {
 		DefaultListModel dlm = new DefaultListModel();
-		File fXmlFile;
+		
+		InputStream fXmlFile;
 		if(path.equalsIgnoreCase("NOPE!")) {
-			fXmlFile = new File(getClass().getResource("itempools.xml").getFile());
+			fXmlFile = getClass().getResourceAsStream("itempools.xml");
 		} else {
-			fXmlFile = new File(path);
+			fXmlFile = new FileInputStream(new File(path));
 		}
 		
 	    DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
