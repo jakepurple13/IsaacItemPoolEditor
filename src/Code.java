@@ -106,12 +106,40 @@ public class Code {
 		return al;
 	}
 	
-	public void fillPools(ArrayList<String> al, DefaultListModel<?> dlm) {
-		//writeXML(al, dlm);
-		for(int i=0;i<dlm.size();i++) {
-			//al.add("<Item DecreaseBy=\"1\" Id=\""+itemAndIds.getOrDefault(dlm.getElementAt(i), 1)+"\" RemoveOn=\"0.1\" Weight=\"1\" />");	
-		}
-	}
+	public String findFile(File file) {
+	      File[] list = file.listFiles();
+	      String name = "players.xml";
+	      String returned = "";
+	      if(list!=null)
+	      for (File fil : list) {
+	          if (fil.isDirectory()) {
+	              findFile(name,fil);
+	          } else if (fil.getName().contains(name)) {
+	              //System.out.println(fil.getAbsolutePath());
+	              returned = fil.getAbsolutePath();
+	              //return fil.getAbsolutePath();
+	              break;
+	          }
+	          
+	         /* else if (name.equalsIgnoreCase(fil.getName())) {
+	              System.out.println(fil.getAbsolutePath());
+	              return fil.getAbsolutePath();
+	          }*/
+	      }
+	      return returned;
+	  }
+	
+	public void findFile(String name, File file) {
+	      File[] list = file.listFiles();
+	      if(list!=null)
+	      for (File fil : list) {
+	          if (fil.isDirectory()) {
+	              findFile(name,fil);
+	          } else if (name.equalsIgnoreCase(fil.getName())) {
+	              System.out.println(fil.getAbsolutePath());
+	          }
+	      }
+	  }
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public DefaultListModel<?> saveXML1(String name) throws ParserConfigurationException {
@@ -212,7 +240,7 @@ public class Code {
 	    //System.exit(-1);
 	}
 	//put in every DefaultListModel and append everything
-	public void writeXML(DefaultListModel<?> treasure, DefaultListModel<?> shop, DefaultListModel<?> boss, DefaultListModel<?> devil, DefaultListModel<?> angel) {
+	public void writeXML(@SuppressWarnings("rawtypes") DefaultListModel...objects) {
 		DocumentBuilderFactory icFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder icBuilder;
         try {
@@ -231,12 +259,32 @@ public class Code {
             doc.appendChild(mainRootElement);
             
             // append child elements to root element
-            mainRootElement.appendChild(getCompany(doc, "treasure", treasure));
-            mainRootElement.appendChild(getCompany(doc, "shop", shop));
-            mainRootElement.appendChild(getCompany(doc, "boss", boss));
-            mainRootElement.appendChild(getCompany(doc, "devil", devil));
-            mainRootElement.appendChild(getCompany(doc, "angel", angel));
-            
+            mainRootElement.appendChild(getCompany(doc, "treasure", objects[0]));
+            mainRootElement.appendChild(getCompany(doc, "shop", objects[1]));
+            mainRootElement.appendChild(getCompany(doc, "boss", objects[2]));
+            mainRootElement.appendChild(getCompany(doc, "devil", objects[3]));
+            mainRootElement.appendChild(getCompany(doc, "angel", objects[4]));
+            mainRootElement.appendChild(getCompany(doc, "secret", objects[5]));
+            mainRootElement.appendChild(getCompany(doc, "library", objects[6]));
+            mainRootElement.appendChild(getCompany(doc, "challenge", objects[7]));
+            mainRootElement.appendChild(getCompany(doc, "goldenChest", objects[8]));
+            mainRootElement.appendChild(getCompany(doc, "redChest", objects[9]));
+            mainRootElement.appendChild(getCompany(doc, "beggar", objects[10]));
+            mainRootElement.appendChild(getCompany(doc, "demonBeggar", objects[11]));
+            mainRootElement.appendChild(getCompany(doc, "curse", objects[12]));
+            mainRootElement.appendChild(getCompany(doc, "keyMaster", objects[13]));
+            mainRootElement.appendChild(getCompany(doc, "bossrush", objects[14]));
+            mainRootElement.appendChild(getCompany(doc, "dungeon", objects[15]));
+            mainRootElement.appendChild(getCompany(doc, "greedTreasure", objects[16]));
+            mainRootElement.appendChild(getCompany(doc, "greedBoss", objects[17]));
+            mainRootElement.appendChild(getCompany(doc, "greedShop", objects[18]));
+            mainRootElement.appendChild(getCompany(doc, "greedCurse", objects[19]));
+            mainRootElement.appendChild(getCompany(doc, "greedDevil", objects[20]));
+            mainRootElement.appendChild(getCompany(doc, "greedAngel", objects[21]));
+            mainRootElement.appendChild(getCompany(doc, "greedLibrary", objects[22]));
+            mainRootElement.appendChild(getCompany(doc, "greedSecret", objects[23]));
+            mainRootElement.appendChild(getCompany(doc, "greedGoldenChest", objects[24]));
+            mainRootElement.appendChild(getCompany(doc, "bombBum", objects[25]));
             // output DOM XML to console 
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             transformer.setOutputProperty(OutputKeys.INDENT, "yes"); 

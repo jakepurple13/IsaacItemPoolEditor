@@ -64,6 +64,24 @@ public class GUI extends JFrame implements ActionListener {
 	DefaultListModel challengeModel;
 	DefaultListModel goldenChestModel;
 	DefaultListModel redChestModel;
+	DefaultListModel beggarModel;
+	DefaultListModel demonBeggarModel;
+	DefaultListModel curseModel;
+	DefaultListModel keyMasterModel;
+	DefaultListModel bossrushModel;
+	DefaultListModel dungeonModel;
+	DefaultListModel greedTreasureModel;
+	DefaultListModel greedBossModel;
+	DefaultListModel greedShopModel;
+	DefaultListModel greedCurseModel;
+	DefaultListModel greedDevilModel;
+	DefaultListModel greedAngelModel;
+	DefaultListModel greedLibraryModel;
+	DefaultListModel greedSecretModel;
+	DefaultListModel greedGoldenChestModel;
+	DefaultListModel bombBumModel;
+	
+	JList itemsToAdd;
 	
 	private JTextField searchBar;
 	String searcher = "";
@@ -86,6 +104,20 @@ public class GUI extends JFrame implements ActionListener {
 		menuItem.addActionListener(this);
 		//TODO:make a menu submit button
 		menu.add(menuItem);
+		
+		JMenuItem deleteAll = new JMenuItem("Delete All");
+		deleteAll.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				clearAll((DefaultListModel) itemsToAdd.getModel());
+			}
+		});
+		//TODO:make a menu submit button
+		menu.add(deleteAll);
+		menuBar.add(menu);
+		
 		menuBar.add(menu);
 		
 		this.setJMenuBar(menuBar);
@@ -106,11 +138,33 @@ public class GUI extends JFrame implements ActionListener {
 		c = new Code(chooser.getSelectedFile().getAbsolutePath());
 		
 		try {
+			
 			treasureModel = c.saveXML1("treasure");
 			shopModel = c.saveXML1("shop");
 			bossModel = c.saveXML1("boss");
 			devilModel = c.saveXML1("devil");
 			angelModel = c.saveXML1("angel");
+			secretModel = c.saveXML1("secret");
+			libraryModel = c.saveXML1("library");
+			challengeModel = c.saveXML1("challenge");
+			goldenChestModel= c.saveXML1("goldenChest");
+			redChestModel = c.saveXML1("redChest");
+			beggarModel = c.saveXML1("beggar");
+			demonBeggarModel = c.saveXML1("demonBeggar");
+			curseModel = c.saveXML1("curse");
+			keyMasterModel = c.saveXML1("keyMaster");
+			bossrushModel = c.saveXML1("bossrush");
+			dungeonModel = c.saveXML1("dungeon");
+			greedTreasureModel = c.saveXML1("greedTreasure");
+			greedBossModel = c.saveXML1("greedBoss");
+			greedShopModel = c.saveXML1("greedShop");
+			greedCurseModel = c.saveXML1("greedCurse");
+			greedDevilModel = c.saveXML1("greedDevil");
+			greedAngelModel = c.saveXML1("greedAngel");
+			greedLibraryModel = c.saveXML1("greedLibrary");
+			greedSecretModel = c.saveXML1("greedSecret");
+			greedGoldenChestModel = c.saveXML1("greedGoldenChest");
+			bombBumModel = c.saveXML1("bombBum");
 			
 		} catch (ParserConfigurationException e1) {
 			// TODO Auto-generated catch block
@@ -120,7 +174,7 @@ public class GUI extends JFrame implements ActionListener {
 		ArrayList<String> items = c.getItemList();
 		
 		JList list = new JList(listModel);
-		JList itemsToAdd = new JList(treasureModel);
+		itemsToAdd = new JList(treasureModel);
 		
 		scrollPane.setViewportView(list);
 		
@@ -204,6 +258,27 @@ public class GUI extends JFrame implements ActionListener {
 		comboBox.addItem("Boss");
 		comboBox.addItem("Devil");
 		comboBox.addItem("Angel");
+		comboBox.addItem("Secret");
+		comboBox.addItem("Library");
+		comboBox.addItem("Challenge");
+		comboBox.addItem("Golden Chest");
+		comboBox.addItem("Red Chest");
+		comboBox.addItem("Beggar");
+		comboBox.addItem("Demon Beggar");
+		comboBox.addItem("Curse");
+		comboBox.addItem("Key Master");
+		comboBox.addItem("Boss Rush");
+		comboBox.addItem("Dungeon");
+		comboBox.addItem("Greed Treasure");
+		comboBox.addItem("Greed Boss");
+		comboBox.addItem("Greed Shop");
+		comboBox.addItem("Greed Curse");
+		comboBox.addItem("Greed Devil");
+		comboBox.addItem("Greed Angel");
+		comboBox.addItem("Greed Library");
+		comboBox.addItem("Greed Secret");
+		comboBox.addItem("Greed Golden Chest");
+		comboBox.addItem("Bomb Bum");
 		
 		btnAdd.addActionListener(new ActionListener() {
 			
@@ -211,30 +286,119 @@ public class GUI extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				String key = comboBox.getSelectedItem().toString();
+				DefaultListModel newOne;
 				switch (key) {
 				case "Shop":
 					shopModel.addElement(list.getSelectedValue());
-					itemsToAdd.setModel(shopModel);
+					newOne = shopModel;
 					break;
 				case "Treasure Room":
 					treasureModel.addElement(list.getSelectedValue());
-					itemsToAdd.setModel(treasureModel);
+					newOne = treasureModel;
 					break;
 				case "Boss":
 					bossModel.addElement(list.getSelectedValue());
-					itemsToAdd.setModel(bossModel);
+					newOne = bossModel;
 					break;
 				case "Devil":
 					devilModel.addElement(list.getSelectedValue());
-					itemsToAdd.setModel(devilModel);
+					newOne = devilModel;
 					break;
 				case "Angel":
 					angelModel.addElement(list.getSelectedValue());
-					itemsToAdd.setModel(angelModel);
+					newOne = angelModel;
+					break;
+				case "Secret":
+					secretModel.addElement(list.getSelectedValue());
+					newOne = secretModel;
+					break;
+				case "Library":
+					libraryModel.addElement(list.getSelectedValue());
+					newOne = libraryModel;
+					break;
+				case "Challenge":
+					challengeModel.addElement(list.getSelectedValue());
+					newOne = challengeModel;
+					break;
+				case "Golden Chest":
+					goldenChestModel.addElement(list.getSelectedValue());
+					newOne = goldenChestModel;
+					break;
+				case "Red Chest":
+					redChestModel.addElement(list.getSelectedValue());
+					newOne = redChestModel;
+					break;
+				case "Beggar":
+					beggarModel.addElement(list.getSelectedValue());
+					newOne = beggarModel;
+					break;
+				case "Demon Beggar":
+					demonBeggarModel.addElement(list.getSelectedValue());
+					newOne = demonBeggarModel;
+					break;
+				case "Curse":
+					curseModel.addElement(list.getSelectedValue());
+					newOne = curseModel;
+					break;
+				case "Key Master":
+					keyMasterModel.addElement(list.getSelectedValue());
+					newOne = keyMasterModel;
+					break;
+				case "Boss Rush":
+					bossrushModel.addElement(list.getSelectedValue());
+					newOne = bossrushModel;
+					break;
+				case "Dungeon":
+					dungeonModel.addElement(list.getSelectedValue());
+					newOne = dungeonModel;
+					break;
+				case "Greed Treasure":
+					greedTreasureModel.addElement(list.getSelectedValue());
+					newOne = greedTreasureModel;
+					break;
+				case "Greed Boss":
+					greedBossModel.addElement(list.getSelectedValue());
+					newOne = greedBossModel;
+					break;
+				case "Greed Shop":
+					greedShopModel.addElement(list.getSelectedValue());
+					newOne = greedShopModel;
+					break;
+				case "Greed Curse":
+					greedCurseModel.addElement(list.getSelectedValue());
+					newOne = greedCurseModel;
+					break;
+				case "Greed Devil":
+					greedDevilModel.addElement(list.getSelectedValue());
+					newOne = greedDevilModel;
+					break;
+				case "Greed Angel":
+					greedAngelModel.addElement(list.getSelectedValue());
+					newOne = greedAngelModel;
+					break;
+				case "Greed Library":
+					greedLibraryModel.addElement(list.getSelectedValue());
+					newOne = greedLibraryModel;
+					break;
+				case "Greed Secret":
+					greedSecretModel.addElement(list.getSelectedValue());
+					newOne = greedSecretModel;
+					break;
+				case "Greed Golden Chest":
+					greedGoldenChestModel.addElement(list.getSelectedValue());
+					newOne = greedGoldenChestModel;
+					break;
+				case "Bomb Bum":
+					bombBumModel.addElement(list.getSelectedValue());
+					newOne = bombBumModel;
 					break;
 				default:
+					newOne = new DefaultListModel();
+					newOne.addElement("Nothing");
 					break;
 				}
+				
+				itemsToAdd.setModel(newOne);
 			}
 		});
 		
@@ -245,30 +409,118 @@ public class GUI extends JFrame implements ActionListener {
 				// TODO Auto-generated method stub
 				try {
 					String key = comboBox.getSelectedItem().toString();
+					DefaultListModel newOne;
 					switch (key) {
 					case "Shop":
-						shopModel.remove(itemsToAdd.getSelectedIndex());
-						itemsToAdd.setModel(shopModel);
+						shopModel.remove(list.getSelectedIndex());
+						newOne = shopModel;
 						break;
 					case "Treasure Room":
-						treasureModel.remove(itemsToAdd.getSelectedIndex());
-						itemsToAdd.setModel(treasureModel);
+						treasureModel.remove(list.getSelectedIndex());
+						newOne = treasureModel;
 						break;
 					case "Boss":
-						bossModel.remove(itemsToAdd.getSelectedIndex());
-						itemsToAdd.setModel(bossModel);
+						bossModel.remove(list.getSelectedIndex());
+						newOne = bossModel;
 						break;
 					case "Devil":
-						devilModel.remove(itemsToAdd.getSelectedIndex());
-						itemsToAdd.setModel(devilModel);
+						devilModel.remove(list.getSelectedIndex());
+						newOne = devilModel;
 						break;
 					case "Angel":
-						angelModel.remove(itemsToAdd.getSelectedIndex());
-						itemsToAdd.setModel(angelModel);
+						angelModel.remove(list.getSelectedIndex());
+						newOne = angelModel;
+						break;
+					case "Secret":
+						secretModel.remove(list.getSelectedIndex());
+						newOne = secretModel;
+						break;
+					case "Library":
+						libraryModel.remove(list.getSelectedIndex());
+						newOne = libraryModel;
+						break;
+					case "Challenge":
+						challengeModel.remove(list.getSelectedIndex());
+						newOne = challengeModel;
+						break;
+					case "Golden Chest":
+						goldenChestModel.remove(list.getSelectedIndex());
+						newOne = goldenChestModel;
+						break;
+					case "Red Chest":
+						redChestModel.remove(list.getSelectedIndex());
+						newOne = redChestModel;
+						break;
+					case "Beggar":
+						beggarModel.remove(list.getSelectedIndex());
+						newOne = beggarModel;
+						break;
+					case "Demon Beggar":
+						demonBeggarModel.remove(list.getSelectedIndex());
+						newOne = demonBeggarModel;
+						break;
+					case "Curse":
+						curseModel.remove(list.getSelectedIndex());
+						newOne = curseModel;
+						break;
+					case "Key Master":
+						keyMasterModel.remove(list.getSelectedIndex());
+						newOne = keyMasterModel;
+						break;
+					case "Boss Rush":
+						bossrushModel.remove(list.getSelectedIndex());
+						newOne = bossrushModel;
+						break;
+					case "Dungeon":
+						dungeonModel.remove(list.getSelectedIndex());
+						newOne = dungeonModel;
+						break;
+					case "Greed Treasure":
+						greedTreasureModel.remove(list.getSelectedIndex());
+						newOne = greedTreasureModel;
+						break;
+					case "Greed Boss":
+						greedBossModel.remove(list.getSelectedIndex());
+						newOne = greedBossModel;
+						break;
+					case "Greed Shop":
+						greedShopModel.remove(list.getSelectedIndex());
+						newOne = greedShopModel;
+						break;
+					case "Greed Curse":
+						greedCurseModel.remove(list.getSelectedIndex());
+						newOne = greedCurseModel;
+						break;
+					case "Greed Devil":
+						greedDevilModel.remove(list.getSelectedIndex());
+						newOne = greedDevilModel;
+						break;
+					case "Greed Angel":
+						greedAngelModel.remove(list.getSelectedIndex());
+						newOne = greedAngelModel;
+						break;
+					case "Greed Library":
+						greedLibraryModel.remove(list.getSelectedIndex());
+						newOne = greedLibraryModel;
+						break;
+					case "Greed Secret":
+						greedSecretModel.remove(list.getSelectedIndex());
+						newOne = greedSecretModel;
+						break;
+					case "Greed Golden Chest":
+						greedGoldenChestModel.remove(list.getSelectedIndex());
+						newOne = greedGoldenChestModel;
+						break;
+					case "Bomb Bum":
+						bombBumModel.remove(list.getSelectedIndex());
+						newOne = bombBumModel;
 						break;
 					default:
+						newOne = new DefaultListModel();
 						break;
 					}
+					
+					itemsToAdd.setModel(newOne);
 				} catch(ArrayIndexOutOfBoundsException e1) {
 					
 				}
@@ -281,38 +533,113 @@ public class GUI extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				String key = comboBox.getSelectedItem().toString();
+				DefaultListModel newOne;
 				switch (key) {
 				case "Shop":
-					itemsToAdd.setModel(shopModel);
+					newOne = shopModel;
 					break;
 				case "Treasure Room":
-					itemsToAdd.setModel(treasureModel);
+					newOne = treasureModel;
 					break;
 				case "Boss":
-					itemsToAdd.setModel(bossModel);
+					newOne = bossModel;
 					break;
 				case "Devil":
-					itemsToAdd.setModel(devilModel);
+					newOne = devilModel;
 					break;
 				case "Angel":
-					itemsToAdd.setModel(angelModel);
+					newOne = angelModel;
+					break;
+				case "Secret":
+					newOne = secretModel;
+					break;
+				case "Library":
+					newOne = libraryModel;
+					break;
+				case "Challenge":
+					newOne = challengeModel;
+					break;
+				case "Golden Chest":
+					newOne = goldenChestModel;
+					break;
+				case "Red Chest":
+					newOne = redChestModel;
+					break;
+				case "Beggar":
+					newOne = beggarModel;
+					break;
+				case "Demon Beggar":
+					newOne = demonBeggarModel;
+					break;
+				case "Curse":
+					newOne = curseModel;
+					break;
+				case "Key Master":
+					newOne = keyMasterModel;
+					break;
+				case "Boss Rush":
+					newOne = bossrushModel;
+					break;
+				case "Dungeon":
+					newOne = dungeonModel;
+					break;
+				case "Greed Treasure":
+					newOne = greedTreasureModel;
+					break;
+				case "Greed Boss":
+					newOne = greedBossModel;
+					break;
+				case "Greed Shop":
+					newOne = greedShopModel;
+					break;
+				case "Greed Curse":
+					newOne = greedCurseModel;
+					break;
+				case "Greed Devil":
+					newOne = greedDevilModel;
+					break;
+				case "Greed Angel":
+					newOne = greedAngelModel;
+					break;
+				case "Greed Library":
+					newOne = greedLibraryModel;
+					break;
+				case "Greed Secret":
+					newOne = greedSecretModel;
+					break;
+				case "Greed Golden Chest":
+					newOne = greedGoldenChestModel;
+					break;
+				case "Bomb Bum":
+					newOne = bombBumModel;
 					break;
 				default:
+					newOne = new DefaultListModel();
 					break;
 				}
+				itemsToAdd.setModel(newOne);
 				pools.setViewportView(itemsToAdd);
 			}
 		});
 		
 		
 	}
-
+	
+	
+	public void clearAll(DefaultListModel dlm) {
+		dlm.clear();
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		//this is for the submit
-		//<Item DecreaseBy="1" Id="415" RemoveOn="0.1" Weight="1" />
-		c.writeXML(treasureModel, shopModel, bossModel, devilModel, angelModel);
+		c.writeXML(treasureModel, shopModel, bossModel, devilModel, angelModel,
+				secretModel, libraryModel, challengeModel, goldenChestModel, redChestModel,
+				beggarModel, demonBeggarModel, curseModel, keyMasterModel, bossrushModel,
+				dungeonModel, greedTreasureModel, greedBossModel, greedShopModel, greedCurseModel,
+				greedDevilModel, greedAngelModel, greedLibraryModel, greedSecretModel, greedGoldenChestModel,
+				bombBumModel);
 		
 	}
 	
