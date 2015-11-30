@@ -1,8 +1,6 @@
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -10,8 +8,6 @@ import java.io.PrintWriter;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
-
 import javax.swing.DefaultListModel;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -49,8 +45,8 @@ public class Code {
 		}
 	}
 	
-	public Code(String paths) throws IOException {
-		path = paths;
+	public Code(boolean useDefault) throws IOException {
+		path = getClass().getResource("itempools.xml").getFile();
 		itemAndIds = new HashMap<String, Integer>();
 		idsAndItem = new HashMap<Integer, String>();
 		items = getItems();
@@ -160,7 +156,13 @@ public class Code {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public DefaultListModel<?> saveXML1(String name) throws ParserConfigurationException {
 		DefaultListModel dlm = new DefaultListModel();
-		File fXmlFile = new File(getClass().getResource("itempools.xml").getFile());
+		File fXmlFile;
+		try {
+			fXmlFile = new File(path);
+		} catch(Exception e1) {
+			fXmlFile = new File(getClass().getResource("itempools.xml").getFile());
+			System.out.println(e1);
+		}
 	    DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 	    DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 	    Document doc = null;
