@@ -83,6 +83,7 @@ public class GUI extends JFrame implements ActionListener {
 	DefaultListModel greedGoldenChestModel;
 	DefaultListModel bombBumModel;
 	
+	@SuppressWarnings("rawtypes")
 	JList itemsToAdd;
 	
 	private JTextField searchBar;
