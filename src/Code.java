@@ -46,7 +46,7 @@ public class Code {
 	}
 	
 	public Code(boolean useDefault) throws IOException {
-		path = getClass().getResource("itempools.xml").getFile();
+		path = "NOPE!";//getClass().getResource("itempools.xml").getFile();
 		itemAndIds = new HashMap<String, Integer>();
 		idsAndItem = new HashMap<Integer, String>();
 		items = getItems();
@@ -157,12 +157,12 @@ public class Code {
 	public DefaultListModel<?> saveXML1(String name) throws ParserConfigurationException {
 		DefaultListModel dlm = new DefaultListModel();
 		File fXmlFile;
-		try {
-			fXmlFile = new File(path);
-		} catch(Exception e1) {
+		if(path.equalsIgnoreCase("NOPE!")) {
 			fXmlFile = new File(getClass().getResource("itempools.xml").getFile());
-			System.out.println(e1);
+		} else {
+			fXmlFile = new File(path);
 		}
+		
 	    DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 	    DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 	    Document doc = null;
@@ -265,7 +265,11 @@ public class Code {
         	
         	PrintWriter out = null;
     		try {
-    			out = new PrintWriter(path);
+    			if(path.equalsIgnoreCase("NOPE!")) {
+    				out = new PrintWriter(new File(System.getProperty("user.home") + "/Desktop/itempools.xml"));
+    			} else {
+    				out = new PrintWriter(path);
+    			}
     		} catch (FileNotFoundException e) {
     			// TODO Auto-generated catch block
     			e.printStackTrace();
@@ -313,8 +317,12 @@ public class Code {
             System.out.println("\nXML DOM Created Successfully..");
             
     		out.close();
+    		if(path.equalsIgnoreCase("NOPE!")) {
+    			deleteFirstLine(System.getProperty("user.home") + "/Desktop/itempools.xml");
+    		} else {
+    			deleteFirstLine(path);
+    		}
     		
-    		deleteFirstLine();
  
         } catch (Exception e) {
             e.printStackTrace();
@@ -344,8 +352,8 @@ public class Code {
         return node;
     }
 	
-    public void deleteFirstLine() throws IOException {
-    	 RandomAccessFile raf = new RandomAccessFile(path, "rw");          
+    public void deleteFirstLine(String paths) throws IOException {
+    	 RandomAccessFile raf = new RandomAccessFile(paths, "rw");          
          //Initial write position                                             
         long writePosition = raf.getFilePointer();                            
         raf.readLine();                                                       
