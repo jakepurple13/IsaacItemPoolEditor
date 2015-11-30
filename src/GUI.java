@@ -134,8 +134,11 @@ public class GUI extends JFrame implements ActionListener {
 	            chooser.getSelectedFile().getName());
 	       System.out.println(chooser.getSelectedFile().getAbsolutePath());
 	    }
-		
-		c = new Code(chooser.getSelectedFile().getAbsolutePath());
+		try {
+			c = new Code(chooser.getSelectedFile());
+		} catch(NullPointerException e1) {
+			c = new Code(System.getProperty("user.home") + "/Desktop");
+		}
 		
 		try {
 			

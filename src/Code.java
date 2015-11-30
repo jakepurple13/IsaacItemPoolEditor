@@ -1,12 +1,16 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 import javax.swing.DefaultListModel;
 import javax.xml.parsers.DocumentBuilder;
@@ -47,6 +51,18 @@ public class Code {
 	
 	public Code(String paths) throws IOException {
 		path = paths;
+		itemAndIds = new HashMap<String, Integer>();
+		idsAndItem = new HashMap<Integer, String>();
+		items = getItems();
+		itemsids = getItemIds();
+		for(int i=0;i<items.size();i++) {
+			itemAndIds.put(items.get(i), Integer.parseInt(itemsids.get(i)));
+			idsAndItem.put(Integer.parseInt(itemsids.get(i)), items.get(i));
+		}
+	}
+	
+	public Code(File paths) throws IOException {
+		path = findFile(paths);
 		itemAndIds = new HashMap<String, Integer>();
 		idsAndItem = new HashMap<Integer, String>();
 		items = getItems();
@@ -108,7 +124,7 @@ public class Code {
 	
 	public String findFile(File file) {
 	      File[] list = file.listFiles();
-	      String name = "players.xml";
+	      String name = "itempools.xml";
 	      String returned = "";
 	      if(list!=null)
 	      for (File fil : list) {
@@ -247,7 +263,7 @@ public class Code {
         	
         	PrintWriter out = null;
     		try {
-    			out = new PrintWriter(path+"/itempools.xml");
+    			out = new PrintWriter(path);
     		} catch (FileNotFoundException e) {
     			// TODO Auto-generated catch block
     			e.printStackTrace();
@@ -295,6 +311,8 @@ public class Code {
             System.out.println("\nXML DOM Created Successfully..");
             
     		out.close();
+    		
+    		deleteFirstLine();
  
         } catch (Exception e) {
             e.printStackTrace();
@@ -324,6 +342,27 @@ public class Code {
         return node;
     }
 	
+    public void deleteFirstLine() throws IOException {
+    	 RandomAccessFile raf = new RandomAccessFile(path, "rw");          
+         //Initial write position                                             
+        long writePosition = raf.getFilePointer();                            
+        raf.readLine();                                                       
+        // Shift the next lines upwards.                                      
+        long readPosition = raf.getFilePointer();                             
+
+        byte[] buff = new byte[1024];                                         
+        int n;                                                                
+        while (-1 != (n = raf.read(buff))) {                                  
+            raf.seek(writePosition);                                          
+            raf.write(buff, 0, n);                                            
+            readPosition += n;                                                
+            writePosition += n;                                               
+            raf.seek(readPosition);                                           
+        }                                                                     
+        raf.setLength(writePosition);                                         
+        raf.close();   
+    }
+    
 	public void saveFile(String path) throws FileNotFoundException {
 		PrintWriter out = new PrintWriter(path+"/itempools.xml");
 		for(int i=0;i<defaultCode.size();i++) {
