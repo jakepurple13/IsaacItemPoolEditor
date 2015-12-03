@@ -29,6 +29,7 @@ public class XMLReaderTest {
 	            
 	            // Returns a NodeList of all the Elements in document order with a given tag name and are contained in the document.
 	            NodeList nodes = doc.getElementsByTagName(element);
+	            
 	            System.out.println("\nHere you go => Total # of Elements: " + nodes.getLength());
 	            for(int i=0;i<nodes.getLength();i++) {
 	            	System.out.println(nodes.item(i).getAttributes().item(0));

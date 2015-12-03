@@ -15,7 +15,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -419,107 +418,107 @@ public class GUI extends JFrame implements ActionListener {
 					DefaultListModel newOne;
 					switch (key) {
 					case "Shop":
-						shopModel.remove(list.getSelectedIndex());
+						shopModel.remove(itemsToAdd.getSelectedIndex());
 						newOne = shopModel;
 						break;
 					case "Treasure Room":
-						treasureModel.remove(list.getSelectedIndex());
+						treasureModel.remove(itemsToAdd.getSelectedIndex());
 						newOne = treasureModel;
 						break;
 					case "Boss":
-						bossModel.remove(list.getSelectedIndex());
+						bossModel.remove(itemsToAdd.getSelectedIndex());
 						newOne = bossModel;
 						break;
 					case "Devil":
-						devilModel.remove(list.getSelectedIndex());
+						devilModel.remove(itemsToAdd.getSelectedIndex());
 						newOne = devilModel;
 						break;
 					case "Angel":
-						angelModel.remove(list.getSelectedIndex());
+						angelModel.remove(itemsToAdd.getSelectedIndex());
 						newOne = angelModel;
 						break;
 					case "Secret":
-						secretModel.remove(list.getSelectedIndex());
+						secretModel.remove(itemsToAdd.getSelectedIndex());
 						newOne = secretModel;
 						break;
 					case "Library":
-						libraryModel.remove(list.getSelectedIndex());
+						libraryModel.remove(itemsToAdd.getSelectedIndex());
 						newOne = libraryModel;
 						break;
 					case "Challenge":
-						challengeModel.remove(list.getSelectedIndex());
+						challengeModel.remove(itemsToAdd.getSelectedIndex());
 						newOne = challengeModel;
 						break;
 					case "Golden Chest":
-						goldenChestModel.remove(list.getSelectedIndex());
+						goldenChestModel.remove(itemsToAdd.getSelectedIndex());
 						newOne = goldenChestModel;
 						break;
 					case "Red Chest":
-						redChestModel.remove(list.getSelectedIndex());
+						redChestModel.remove(itemsToAdd.getSelectedIndex());
 						newOne = redChestModel;
 						break;
 					case "Beggar":
-						beggarModel.remove(list.getSelectedIndex());
+						beggarModel.remove(itemsToAdd.getSelectedIndex());
 						newOne = beggarModel;
 						break;
 					case "Demon Beggar":
-						demonBeggarModel.remove(list.getSelectedIndex());
+						demonBeggarModel.remove(itemsToAdd.getSelectedIndex());
 						newOne = demonBeggarModel;
 						break;
 					case "Curse":
-						curseModel.remove(list.getSelectedIndex());
+						curseModel.remove(itemsToAdd.getSelectedIndex());
 						newOne = curseModel;
 						break;
 					case "Key Master":
-						keyMasterModel.remove(list.getSelectedIndex());
+						keyMasterModel.remove(itemsToAdd.getSelectedIndex());
 						newOne = keyMasterModel;
 						break;
 					case "Boss Rush":
-						bossrushModel.remove(list.getSelectedIndex());
+						bossrushModel.remove(itemsToAdd.getSelectedIndex());
 						newOne = bossrushModel;
 						break;
 					case "Dungeon":
-						dungeonModel.remove(list.getSelectedIndex());
+						dungeonModel.remove(itemsToAdd.getSelectedIndex());
 						newOne = dungeonModel;
 						break;
 					case "Greed Treasure":
-						greedTreasureModel.remove(list.getSelectedIndex());
+						greedTreasureModel.remove(itemsToAdd.getSelectedIndex());
 						newOne = greedTreasureModel;
 						break;
 					case "Greed Boss":
-						greedBossModel.remove(list.getSelectedIndex());
+						greedBossModel.remove(itemsToAdd.getSelectedIndex());
 						newOne = greedBossModel;
 						break;
 					case "Greed Shop":
-						greedShopModel.remove(list.getSelectedIndex());
+						greedShopModel.remove(itemsToAdd.getSelectedIndex());
 						newOne = greedShopModel;
 						break;
 					case "Greed Curse":
-						greedCurseModel.remove(list.getSelectedIndex());
+						greedCurseModel.remove(itemsToAdd.getSelectedIndex());
 						newOne = greedCurseModel;
 						break;
 					case "Greed Devil":
-						greedDevilModel.remove(list.getSelectedIndex());
+						greedDevilModel.remove(itemsToAdd.getSelectedIndex());
 						newOne = greedDevilModel;
 						break;
 					case "Greed Angel":
-						greedAngelModel.remove(list.getSelectedIndex());
+						greedAngelModel.remove(itemsToAdd.getSelectedIndex());
 						newOne = greedAngelModel;
 						break;
 					case "Greed Library":
-						greedLibraryModel.remove(list.getSelectedIndex());
+						greedLibraryModel.remove(itemsToAdd.getSelectedIndex());
 						newOne = greedLibraryModel;
 						break;
 					case "Greed Secret":
-						greedSecretModel.remove(list.getSelectedIndex());
+						greedSecretModel.remove(itemsToAdd.getSelectedIndex());
 						newOne = greedSecretModel;
 						break;
 					case "Greed Golden Chest":
-						greedGoldenChestModel.remove(list.getSelectedIndex());
+						greedGoldenChestModel.remove(itemsToAdd.getSelectedIndex());
 						newOne = greedGoldenChestModel;
 						break;
 					case "Bomb Bum":
-						bombBumModel.remove(list.getSelectedIndex());
+						bombBumModel.remove(itemsToAdd.getSelectedIndex());
 						newOne = bombBumModel;
 						break;
 					default:
