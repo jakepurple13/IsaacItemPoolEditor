@@ -29,7 +29,6 @@ import org.xml.sax.SAXException;
 
 public class Code {
 	
-	ArrayList<String> defaultCode = new ArrayList<String>();
 	HashMap<String, Integer> itemAndIds;
 	HashMap<Integer, String> idsAndItem;
 	ArrayList<String> items;
@@ -213,53 +212,6 @@ public class Code {
 	    return dlm;
 	}
 	
-	public void saveXML() throws ParserConfigurationException {
-		File fXmlFile = new File(getClass().getResource("itempools.xml").getFile());
-	    DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-	    DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-	    Document doc = null;
-	    try {
-	        doc = dBuilder.parse(fXmlFile);
-	    } catch (SAXException e) {
-	        // TODO Auto-generated catch block
-	        e.printStackTrace();
-	    } catch (IOException e) {
-	        // TODO Auto-generated catch block
-	        e.printStackTrace();
-	    }
-
-	    doc.getDocumentElement().normalize();
-
-	    System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-
-	    NodeList nList = doc.getElementsByTagName("Pool");
-
-	    System.out.println("----------------------------");
-
-	    for (int temp = 0; temp < nList.getLength(); temp++) {
-
-	        Node nNode = nList.item(temp);
-
-	        System.out.println("\nCurrent Element :" + nNode.getNodeName() + " " + nNode.getAttributes().getNamedItem("Name").getNodeValue());
-	        
-	        if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-
-	            Element eElement = (Element) nNode;
-	            //System.out.println(eElement.getAttribute("Name"));
-	            //System.out.println("Item : " + eElement.getElementsByTagName("Item").item(0).getTextContent());
-	            //System.out.println("Item Id : " + eElement.getElementsByTagName("Item").item(0).getAttributes().getNamedItem("Id").getNodeValue());
-	            //System.out.println("Item Id : " + idsAndItem.get(new Integer(eElement.getElementsByTagName("Item").item(0).getAttributes().getNamedItem("Id").getNodeValue())));
-	            for(int i=0;i<eElement.getElementsByTagName("Item").getLength();i++) {
-	            	System.out.println("Item Id : " + eElement.getElementsByTagName("Item").item(i).getAttributes().getNamedItem("Id").getNodeValue());
-		            System.out.println("Item : " + idsAndItem.get(new Integer(eElement.getElementsByTagName("Item").item(i).getAttributes().getNamedItem("Id").getNodeValue())));
-	            }
-	        }
-	    }
-	    
-	    //writeXML();
-	    
-	    //System.exit(-1);
-	}
 	//put in every DefaultListModel and append everything
 	public void writeXML(@SuppressWarnings("rawtypes") DefaultListModel...objects) {
 		DocumentBuilderFactory icFactory = DocumentBuilderFactory.newInstance();
@@ -375,13 +327,5 @@ public class Code {
         raf.setLength(writePosition);                                         
         raf.close();   
     }
-    
-	public void saveFile(String path) throws FileNotFoundException {
-		PrintWriter out = new PrintWriter(path+"/itempools.xml");
-		for(int i=0;i<defaultCode.size();i++) {
-			out.println(defaultCode.get(i));
-		}
-		out.close();
-	}
 	
 }
